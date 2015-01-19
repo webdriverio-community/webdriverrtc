@@ -37,8 +37,6 @@ WebdriverRTC.init(matrix);
 
 var channel = Math.round(Math.random() * 100000000000);
 
-var fs = require('fs');
-
 matrix
     .init()
     .url('https://apprtc.appspot.com/r/' + channel)
@@ -46,7 +44,6 @@ matrix
     .startAnalyzing('appController.call_.pcClient_.pc_')
     .pause(10000)
     .getStats(10000,function(err, stats) {
-        console.log(err);
         console.log(stats);
     })
     .end();
