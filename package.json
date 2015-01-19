@@ -2,10 +2,9 @@
   "name": "webdriverrtc",
   "version": "0.0.0",
   "description": "WebRTC testing tool for WebdriverIO",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Christian Bromann <christian@saucelabs.com>",
+  "homepage": "https://github.com/webdriverio/webdriverrtc",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/webdriverio/webdriverrtc"
@@ -15,13 +14,16 @@
     "webdriver",
     "webrtc"
   ],
-  "author": "Christian Bromann <christian@saucelabs.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/webdriverio/webdriverrtc/issues"
   },
-  "homepage": "https://github.com/webdriverio/webdriverrtc",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
   "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
     "webdriverio": "git://github.com/webdriverio/webdriverio#v2.5.0rc1"
   }
 }
