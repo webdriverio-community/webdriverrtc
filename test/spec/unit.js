@@ -1,4 +1,4 @@
-var calcResult = require('../../lib/calcResult');
+var calcResult = require('../../lib/helpers/calcResult');
 
 describe('calcResult', function() {
 
