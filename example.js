@@ -41,8 +41,10 @@ matrix
     .init()
     .url('https://apprtc.appspot.com/r/' + channel)
     .pause(5000)
-    .startAnalyzing(function() {
-        return appController.call_.pcClient_.pc_;
+    .startAnalyzing({
+        selectorMethod: function() {
+            return appController.call_.pcClient_.pc_;
+        }
     })
     .getConnectionInformation(function(err, connectionType) {
         console.log(connectionType);
