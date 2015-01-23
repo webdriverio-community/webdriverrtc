@@ -25,5 +25,8 @@
     "chai": "^1.10.0",
     "mocha": "^2.1.0",
     "webdriverio": "git://github.com/webdriverio/webdriverio#v2.5.0rc1"
+  },
+  "dependencies": {
+    "deepmerge": "^0.2.7"
   }
 }
