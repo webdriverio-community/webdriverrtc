@@ -50,7 +50,10 @@ matrix
         console.log(connectionType);
     })
     .pause(10000)
-    .getStats(10000,function(err, stats) {
-        console.log(stats);
+    .getStats(10000, function(err, mean, median, max, min) {
+        console.log('mean:', mean);
+        console.log('median:', median);
+        console.log('max:', max);
+        console.log('min:', min);
     })
     .end();
