@@ -17,7 +17,7 @@ as part of your integration tests.
 
 ## Prerequisites
 
-To use WebdriverRTC you need at least WebdriverIO `>=v2.5.0` (not available yet but merged into master).
+To use WebdriverRTC you need at least WebdriverIO `>=v2.5.0` (not available yet but already merged into master).
 
 ## How does it work
 
@@ -25,7 +25,7 @@ WebdriverRTC masquerades the url command and injects a script after the page has
 the standard `RTCPeerConnection` interface in order to make themself access to all created `RTCPeerConnection`
 objects. After you start the analyzation it repeats calling the `getStats` method with a specific interval
 and saves all results to an internal object lying in window scope. Then you can use WebdriverRTC commands
-to access these information.
+to access these information. Currently only the Chrome browser is supported. But there's more to come.
 
 ## Example
 
@@ -248,4 +248,4 @@ Please fork, add specs, and send pull requests! In lieu of a formal styleguide, 
 maintain the existing coding style.
 
 ## Release History
-* 2015-02-4   v0.1.0   first working version released
+* 2015-02-04   v0.1.0   first working version released

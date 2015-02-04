@@ -1,6 +1,6 @@
 {
   "name": "webdriverrtc",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "WebRTC testing tool for WebdriverIO",
   "author": "Christian Bromann <christian@saucelabs.com>",
   "homepage": "https://github.com/webdriverio/webdriverrtc",
@@ -12,7 +12,11 @@
   "keywords": [
     "webdriverio",
     "webdriver",
-    "webrtc"
+    "webrtc",
+    "rtcpeerconnection",
+    "selenium",
+    "internals",
+    "chrome"
   ],
   "bugs": {
     "url": "https://github.com/webdriverio/webdriverrtc/issues"
@@ -24,7 +28,7 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.1.0",
-    "webdriverio": "git://github.com/webdriverio/webdriverio#v2.5.0rc1"
+    "webdriverio": "git://github.com/webdriverio/webdriverio#master"
   },
   "dependencies": {
     "deepmerge": "^0.2.7"
