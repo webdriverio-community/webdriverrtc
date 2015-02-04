@@ -21,10 +21,10 @@ To use WebdriverRTC you need at least WebdriverIO `>=v2.5.0` (not available yet 
 
 ## How does it work
 
-WebdriverRTC masquerades the url command and injects a script after the page has loaded to overwrite
-the standard `RTCPeerConnection` interface in order to make themself access to all created `RTCPeerConnection`
-objects. After you start the analyzation it repeats calling the `getStats` method with a specific interval
-and saves all results to an internal object lying in window scope. Then you can use WebdriverRTC commands
+WebdriverRTC masquerades the url command and injects a script after the page has been loaded to overwrite
+the standard `RTCPeerConnection` interface and get access to all created `RTCPeerConnection` objects.
+After you start analyzing it repeats calling the `getStats` method with a specific interval
+and saves all results to an internal object lying in the window scope. Then you can use WebdriverRTC commands
 to access these information. Currently only the Chrome browser is supported. But there's more to come.
 
 ## Example
@@ -56,11 +56,11 @@ var matrix = require('webdriverio').multiremote({
 require('webdrivercss').init(matrix);
 ```
 
-Now start your selenium session and do everyting required to establish a WebRTC connection. __Note__ that
+Now start your selenium session and do everything required to establish a WebRTC connection. __Note__ that
 you need to run WebdriverIO in multiremote mode if you don't have something fancy that autoconnects your
-browser. But that is the reason why WebdriverIO has something like multiremote. After the connection was
-established run `startAnalyzing`, make a pause for a specific amount of time and then grab the stats for
-that time period.
+browser. Multiremote can be really helpful in these situations where you need to control more then one browser.
+After the connection was established run `startAnalyzing`, make a pause for a specific amount of time
+and then grab the stats for that time period.
 
 ```js
 matrix
@@ -92,9 +92,9 @@ WebdriverRTC enhances your client with a small amount of new commands in order t
 Start with WebRTC analyzing.
 
 #### options
-__instance__ (*String*):<br>instance name of a specific multibrowser instance you want to use for your analyzation<br><br>
-__interval__ (*Number*):<br>defines the interval on which `getStats` will be called<br><br>
-__selectorMethod__ (*Function*):<br>if you want to take stats of a specific RTCPeerConnection object you can use this function to return that object. Also necessary if your app creates an object on document load event.<br>
+__instance__ (*String*):<br>instance name of a specific multibrowser instance you want to use for your analyzing<br><br>
+__interval__ (*Number*):<br>defines the interval on which `getStats` will get called<br><br>
+__selectorMethod__ (*Function*):<br>if you want to take stats of a specific RTCPeerConnection object you can use this function to return that object. Also necessary if your app creates an object immediatelly after the page got loaded.<br>
 
 Example:
 
@@ -139,9 +139,9 @@ matrix.getConnectionInformation(function(connection) {
 Returns all stats within given duration in different formats.
 
 #### duration
-You can specify a specific time frame for which you want to receive the stats. If you pass in a number
+You can specify a specific time frame in which you want to receive the stats. If you pass in a number
 you will receive stats within the last x (your number) ms. You can also be more specific and pass in
-an object with `from` and `to` attribues and desired timestame as values respectively. If you pass in
+an object with `from` and `to` attribues and desired timestamps as value respectively. If you pass in
 null, you will receive the last taken stat trace.
 
 Type: *Number|Object*<br>
