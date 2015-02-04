@@ -1,3 +1,10 @@
+/**
+ * This tests fails if you clap or scream while the test is running
+ *
+ * @author Christian Bromann <christian@saucelabs.com>
+ * @license MIT
+ */
+
 var WebdriverIO = require('webdriverio'),
     WebdriverRTC = require('../'),
     assert = require('assert'),

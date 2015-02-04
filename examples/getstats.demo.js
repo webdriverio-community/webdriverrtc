@@ -1,3 +1,11 @@
+/**
+ * Example script that opens "https://apprtc.appspot.com" creates an WebRTC connection
+ * and traces this connection for 10 seconds to print the available results
+ *
+ * @author Christian Bromann <christian@saucelabs.com>
+ * @license MIT
+ */
+
 var WebdriverIO = require('webdriverio'),
     WebdriverRTC = require('../'),
     path = require('path'),
