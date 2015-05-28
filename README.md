@@ -220,7 +220,7 @@ $ npm install git://github.com/webdriverio/webdriverio#master
 Then start the `getstats.demo.js` by running:
 
 ```sh
-$ node ./examples./getstats.demo.js
+$ node ./examples/getstats.demo.js
 ```
 
 It should start two Selenium sessions and should trace the WebRTC connection, created on [https://apprtc.appspot.com](https://apprtc.appspot.com).
@@ -237,7 +237,7 @@ recorded stat. Run the script and start to scream or clap in your hands and it w
 an error message.
 
 ```sh
-$ node ./examples./scream.demo.js
+$ node ./examples/scream.demo.js
 ```
 
 ## Contributing
