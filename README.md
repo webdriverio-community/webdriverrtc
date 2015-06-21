@@ -51,6 +51,9 @@ var matrix = require('webdriverio').multiremote({
         }
     }
 });
+
+var WebdriverRTC = require('webdriverrtc');
+WebdriverRTC.init(matrix);
 ```
 
 Now start your selenium session and do everything required to establish a WebRTC connection. __Note__ that
