@@ -3,7 +3,7 @@
 WebdriverRTC [![Build Status](https://travis-ci.org/webdriverio/webdriverrtc.svg?branch=master)](https://travis-ci.org/webdriverio/webdriverrtc)
 ============
 
-__Note:__ WebdriverCSS isn't yet compatible with WebdriverIO `v3.0`. We are currently working on it to make that happen soon. So stay tuned.
+__Note:__ WebdriverRTC isn't yet compatible with WebdriverIO `v3.0`. We are currently working on it to make that happen soon. So stay tuned.
 
 This project is an extension to [WebdriverIO](http://webdriver.io) and enables your client instance
 to grep statistical data from a running WebRTC peer connection. According to the [w3 WebRTC draft](http://www.w3.org/TR/webrtc/#dom-peerconnection-getstats)
