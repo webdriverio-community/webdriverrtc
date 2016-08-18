@@ -11,23 +11,16 @@
 var WebdriverIO = require('webdriverio')
 var WebdriverRTC = require('../')
 var path = require('path')
-var fs = require('fs')
 var args = [
     'use-fake-device-for-media-stream',
     'use-fake-ui-for-media-stream'
 ]
 
-/**
- * check if fake videos exist
- */
 var argsBrowserA = args.slice(0, args.length)
-if (fs.existsSync(path.join(__dirname, '..', 'sign_irene_qcif.y4m'))) {
-    argsBrowserA.push('use-file-for-fake-video-capture=' + path.join(__dirname, '..', 'sign_irene_qcif.y4m'))
-}
+argsBrowserA.push('use-file-for-fake-video-capture=' + path.join(__dirname, 'fixtures', 'sign_irene_qcif.y4m'))
+
 var argsBrowserB = args.slice(0, args.length)
-if (fs.existsSync(path.join(__dirname, '..', 'silent_qcif.y4m'))) {
-    argsBrowserB.push('use-file-for-fake-video-capture=' + path.join(__dirname, '..', 'silent_qcif.y4m'))
-}
+argsBrowserB.push('use-file-for-fake-video-capture=' + path.join(__dirname, 'fixtures', 'silent_qcif.y4m'))
 
 var matrix = WebdriverIO.multiremote({
     browserA: {

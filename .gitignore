@@ -27,6 +27,3 @@ build
 
 # Users Environment Variables
 .lock-wscript
-
-# video files
-*.y4m
