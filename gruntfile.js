@@ -7,7 +7,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: './lib',
-                    src: ['**/*.js'],
+                    src: ['**/*.js', '!browser/*.js'],
                     dest: 'build',
                     ext: '.js'
                 }]
@@ -42,11 +42,24 @@ module.exports = function (grunt) {
         },
         watch: {
             commands: {
-                files: ['index.js', 'lib/**/*.js'],
-                tasks: ['babel:commands'],
-                options: {
-                    spawn: false
-                }
+                files: ['lib/*.js', 'lib/helpers/*.js'],
+                tasks: ['babel'],
+                options: { spawn: false }
+            },
+            browserscripts: {
+                files: ['lib/browser/*.js'],
+                tasks: ['copy:browserscripts'],
+                options: { spawn: false }
+            }
+        },
+        copy: {
+            browserscripts: {
+                files: [{
+                    expand: true,
+                    cwd: 'lib',
+                    src: 'browser/*.js',
+                    dest: 'build'
+                }]
             }
         }
     })
@@ -57,7 +70,8 @@ module.exports = function (grunt) {
         grunt.task.run([
             'eslint',
             'clean',
-            'babel'
+            'babel',
+            'copy'
         ])
     })
     grunt.registerTask('release', 'Bump and tag version', function (type) {
