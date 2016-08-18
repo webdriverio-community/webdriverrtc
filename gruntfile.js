@@ -13,11 +13,21 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        mochaTest: {
+            unit: {
+                src: ['./test/bootstrap.js', './test/spec/**/*'],
+                options: {
+                    reporter: 'spec',
+                    require: ['babel-register'],
+                    timeout: 120000
+                }
+            }
+        },
         eslint: {
             options: {
                 parser: 'babel-eslint'
             },
-            target: ['index.js', 'lib/**/*.js', 'examples/**/*.js'] //, 'test/**/*.js']
+            target: ['index.js', 'lib/**/*.js', 'examples/**/*.js', 'test/**/*.js']
         },
         contributors: {
             options: {

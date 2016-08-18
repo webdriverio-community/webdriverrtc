@@ -52,7 +52,7 @@
     "grunt-mocha-test": "^0.12.7",
     "grunt-npm": "0.0.2",
     "load-grunt-tasks": "^3.5.0",
-    "mocha": "^2.3.4",
+    "mocha": "^3.0.2",
     "webdriverio": "git://github.com/webdriverio/webdriverio#master"
   },
   "dependencies": {
