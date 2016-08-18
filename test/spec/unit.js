@@ -1,5 +1,6 @@
 import calcResult from '../../lib/helpers/calcResult'
 import exampleResults from '../fixtures/example.json'
+import testResult from '../fixtures/test.json'
 
 describe('calcResult', () => {
     it('should find the min value', () => {
@@ -20,6 +21,22 @@ describe('calcResult', () => {
         maxResult.attr3.attr1.should.be.equal(43)
         maxResult.attr3.attr2.should.be.equal(46)
         maxResult.attr3.attr3.attr1.attr1.should.be.equal(49)
+    })
+
+    it('can calculate results from real world example', function () {
+        let mean = calcResult['+'](testResult)
+        mean = calcResult['/'](mean, testResult.length)
+
+        let median = calcResult['[]'](testResult)
+        median = calcResult['-|-'](median)
+
+        let max = calcResult['max'](testResult)
+        let min = calcResult['min'](testResult)
+
+        min.video.bandwidth.actualEncBitrate.should.be.equal(336368)
+        max.video.bandwidth.actualEncBitrate.should.be.equal(627198)
+        mean.video.bandwidth.actualEncBitrate.should.be.equal(486119.33)
+        median.video.bandwidth.actualEncBitrate.should.be.equal(484608)
     })
 
     describe('should be able to calculate the mean', () => {
