@@ -36,7 +36,7 @@
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.11.6",
-    "chai": "^1.10.0",
+    "chai": "^3.5.0",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
@@ -51,9 +51,9 @@
     "grunt-eslint": "^19.0.0",
     "grunt-mocha-test": "^0.12.7",
     "grunt-npm": "0.0.2",
-    "load-grunt-tasks": "^3.5.0",
+    "load-grunt-tasks": "^3.5.2",
     "mocha": "^3.0.2",
-    "webdriverio": "git://github.com/webdriverio/webdriverio#master"
+    "webdriverio": "^4.2.5"
   },
   "dependencies": {
     "deepmerge": "^0.2.7"
