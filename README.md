@@ -3,8 +3,6 @@
 WebdriverRTC [![Build Status](https://travis-ci.org/webdriverio/webdriverrtc.svg?branch=master)](https://travis-ci.org/webdriverio/webdriverrtc) [![Gitter](https://badges.gitter.im/webdriverio/webdriverio.svg)](https://gitter.im/webdriverio/webdriverio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![devDependencies Status](https://david-dm.org/webdriverio/webdriverrtc/dev-status.svg)](https://david-dm.org/webdriverio/webdriverrtc?type=dev)
 ============
 
-__Note:__ WebdriverRTC isn't yet compatible any recent WebdriverIO version. We are currently working on it to release a new version soon.
-
 This project is an extension to [WebdriverIO](http://webdriver.io) and enables your client instance to grep statistical data from a running WebRTC peer connection. According to the [w3 WebRTC draft](http://www.w3.org/TR/webrtc/#dom-peerconnection-getstats) all `RTCPeerConnection` objects provide a method called [`getStats`](http://www.w3.org/TR/webrtc/#widl-RTCPeerConnection-getStats-void-MediaStreamTrack-selector-RTCStatsCallback-successCallback-RTCPeerConnectionErrorCallback-failureCallback) which returns a [`RTCStats`](http://www.w3.org/TR/webrtc/#idl-def-RTCStats) object with useful information about things like packet losts or the audio input level which can be helpful in order to test your network connection or environment (e.g. did my "Mute" button really work?).
 
 This means that you can access all statistical data from `chrome://webrtc-internals` using Selenium as part of your integration tests.
@@ -13,7 +11,7 @@ This means that you can access all statistical data from `chrome://webrtc-intern
 
 ## Prerequisites
 
-To use WebdriverRTC you need at least WebdriverIO `>=v2.5.0` (not available yet but already merged into master).
+To use WebdriverRTC you need at least WebdriverIO `>=v4`
 
 ## How does it work
 
@@ -45,7 +43,9 @@ var matrix = require('webdriverio').multiremote({
 });
 
 var WebdriverRTC = require('webdriverrtc');
-WebdriverRTC.init(matrix);
+WebdriverRTC.init(matrix,  {
+    browser: 'browserA' // define browser that collects data
+});
 ```
 
 Now start your selenium session and do everything required to establish a WebRTC connection. __Note__ that you need to run WebdriverIO in multiremote mode if you don't have something fancy that autoconnects your browser. Multiremote can be really helpful in these situations where you need to control more then one browser. After the connection was established run `startAnalyzing`, make a pause for a specific amount of time and then grab the stats for that time period.
@@ -75,24 +75,15 @@ matrix
 
 WebdriverRTC enhances your client with a small amount of new commands in order to use this plugin properly:
 
-### startAnalyzing(options)
+### startAnalyzing(<Function>)
 
-Start with WebRTC analyzing.
-
-#### options
-__instance__ (*String*):<br>instance name of a specific multibrowser instance you want to use for your analyzing<br><br>
-__interval__ (*Number*):<br>defines the interval on which `getStats` will get called<br><br>
-__selectorMethod__ (*Function*):<br>if you want to take stats of a specific RTCPeerConnection object you can use this function to return that object. Also necessary if your app creates an object immediatelly after the page got loaded.<br>
+Start with WebRTC analyzing. If you want to take stats of a specific RTCPeerConnection object you can use this function to return that object. Also necessary if your app creates an object immediatelly after the page got loaded.
 
 Example:
 
 ```js
-matrix.startAnalyzing({
-    instance: 'browserA',
-    interval: 500,
-    selectorMethod: function() {
-        return appController.call_.pcClient_.pc_;
-    }
+browserA.startAnalyzing(function() {
+    return appController.call_.pcClient_.pc_;
 });
 ```
 
@@ -122,7 +113,7 @@ matrix.getConnectionInformation(function(connection) {
 });
 ```
 
-### getStats(duration, callback)
+### getStats(duration)
 
 Returns all stats within given duration in different formats.
 
@@ -131,13 +122,10 @@ You can specify a specific time frame in which you want to receive the stats. If
 
 Type: *Number|Object*<br>
 
-#### callback
-Provides stat results in different formats: `mean`, `median`, `max`, `min`. You can also get access to the raw stat report with even more browser specific information. Example: get stats of the last 10 seconds:
-
 ```js
 matrix
     .pause(10000)
-    .getStats(10000, function(err, mean) {
+    .getStats(10000).then(function(mean) {
         /**
          * this test would fail if you are too loud during the test ;-)
          */
@@ -197,10 +185,12 @@ This is how an example result object does look like:
 
 ## Examples
 
-There are two examples prepared which show how easy it is to trace WebRTC statistics. Before running them make sure you have the current beta version of WebdriverIO installed:
+There are two examples prepared which show how easy it is to trace WebRTC statistics. Before running them make sure you have the project cloned and WebdriverIO installed:
 
 ```sh
-$ npm install git://github.com/webdriverio/webdriverio#master
+$ g clone git@github.com:webdriverio/webdriverrtc.git
+$ cd webdriverrtc
+$ npm install webdriverio
 ```
 
 Then start the `getstats.demo.js` by running:
@@ -209,12 +199,7 @@ Then start the `getstats.demo.js` by running:
 $ node ./examples/getstats.demo.js
 ```
 
-It should start two Selenium sessions and should trace the WebRTC connection, created on [https://apprtc.appspot.com](https://apprtc.appspot.com). You will get the result formatted as `mean`, `median`, `max`, `min`. If you want to use a fake video instead of using the camera on your computer just download the following two y4m files by calling:
-
-```sh
-$ curl -O https://media.xiph.org/video/derf/y4m/sign_irene_qcif.y4m
-$ curl -O https://media.xiph.org/video/derf/y4m/silent_qcif.y4m
-```
+It should start two Selenium sessions and should trace the WebRTC connection, created on [https://apprtc.appspot.com](https://apprtc.appspot.com). You will get the result formatted as `mean`, `median`, `max`, `min`.
 
 The other examples will prove that you can let your tests fail according on the results of the recorded stat. Run the script and start to scream or clap in your hands and it will return with an error message.
 
@@ -227,3 +212,4 @@ Please fork, add specs, and send pull requests! In lieu of a formal styleguide, 
 
 ## Release History
 * 2015-02-04   v0.1.0   first working version released
+* 2016-08-17   v1.0.0   make webdriverrtc compatible with WebdriverIO v4
