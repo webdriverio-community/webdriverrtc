@@ -27,24 +27,32 @@ var matrix = WebdriverIO.multiremote({
     }
 })
 
-WebdriverRTC.init(matrix)
+WebdriverRTC.init(matrix, {
+    browser: 'browserA'
+})
 
 var channel = Math.round(Math.random() * 100000000000)
+var browserA = matrix.select('browserA')
 
 matrix
     .init()
     .url('https://apprtc.appspot.com/r/' + channel)
     .click('#confirm-join-button')
     .pause(5000)
-    .startAnalyzing({
-        selectorMethod: function () {
+    .call(function () {
+        return browserA.startAnalyzing(function () {
             return appController.call_.pcClient_.pc_
-        }
-    })
-    .pause(5000)
-    .getStats(5000).then(function (mean, median, max, min, results) {
-        inputLevel = max.audio.outbound.inputLevel
+        })
+        .pause(5000)
+        .getStats(5000).then(function (result) {
+            inputLevel = result.max.audio.outbound.inputLevel
+        })
     })
     .end().then(function () {
-        assert.ok(inputLevel < 5000, 'This was too loud! Your audio input level was ' + inputLevel + '.')
+        /**
+         * assert in next event loop so that node actually throws the error
+         */
+        process.nextTick(function () {
+            assert.ok(inputLevel < 5000, 'This was too loud! Your audio input level was ' + inputLevel + '.')
+        })
     })

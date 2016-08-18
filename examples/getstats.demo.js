@@ -44,28 +44,25 @@ var matrix = WebdriverIO.multiremote({
     }
 })
 
-WebdriverRTC.init(matrix)
+WebdriverRTC.init(matrix, {
+    browser: 'browserA'
+})
 
 var channel = Math.round(Math.random() * 100000000000)
+var browserA = matrix.select('browserA')
 
 matrix
     .init()
     .url('https://apprtc.appspot.com/r/' + channel)
     .click('#confirm-join-button')
     .pause(5000)
-    .startAnalyzing({
-        selectorMethod: function () {
+    .call(function () {
+        return browserA.startAnalyzing(function () {
             return appController.call_.pcClient_.pc_
-        }
-    })
-    .getConnectionInformation().then(function (connectionType) {
-        console.log(connectionType)
-    })
-    .pause(10000)
-    .getStats(10000).then(function (mean, median, max, min) {
-        console.log('mean:', mean)
-        console.log('median:', median)
-        console.log('max:', max)
-        console.log('min:', min)
+        }).getConnectionInformation().then(function (connectionType) {
+            console.log(connectionType)
+        }).pause(2000).getStats(2000).then(function (result) {
+            console.log(result)
+        })
     })
     .end()
