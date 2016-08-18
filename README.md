@@ -1,6 +1,6 @@
 ![WebdriverRTC](http://www.christian-bromann.com/wdrtc.png)
 
-WebdriverRTC [![Build Status](https://travis-ci.org/webdriverio/webdriverrtc.svg?branch=master)](https://travis-ci.org/webdriverio/webdriverrtc) [![Gitter](https://badges.gitter.im/webdriverio/webdriverio.svg)](https://gitter.im/webdriverio/webdriverio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+WebdriverRTC [![Build Status](https://travis-ci.org/webdriverio/webdriverrtc.svg?branch=master)](https://travis-ci.org/webdriverio/webdriverrtc) [![Gitter](https://badges.gitter.im/webdriverio/webdriverio.svg)](https://gitter.im/webdriverio/webdriverio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![devDependencies Status](https://david-dm.org/webdriverio/webdriverrtc/dev-status.svg)](https://david-dm.org/webdriverio/webdriverrtc?type=dev)
 ============
 
 __Note:__ WebdriverRTC isn't yet compatible any recent WebdriverIO version. We are currently working on it to release a new version soon.
